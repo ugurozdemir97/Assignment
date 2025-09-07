@@ -15,21 +15,24 @@ export class PostsService {
   ];
 
   findAll() {return this.posts}
+  
   findByUser(userId: number) {return this.posts.filter(post => post.userId === userId);}
 
-  /*
-  findOne(id: number) {
-    return this.posts.find(post => post.id === id);
+  deleteByUser(userId: number) {
+    this.posts = this.posts.filter(post => post.userId !== userId);
+    return this.posts;
   }
 
-  findByUser(userId: number) {
-    return this.posts.filter(post => post.userId === userId);
+  delete(id: number) {
+    const index = this.posts.findIndex(p => p.id === id);
+    if (index === -1) return null;
+    return this.posts.splice(index, 1)[0];
   }
 
   create(post: any) {
-    post.id = this.posts.length + 1;
+    post.id = this.posts[this.posts.length - 1]?.id + 1;
     this.posts.push(post);
-    return post;
+    return {success: true, message: "Post created", post: post};;
   }
 
   update(id: number, updatedPost: any) {
@@ -39,10 +42,4 @@ export class PostsService {
     return this.posts[index];
   }
 
-  delete(id: number) {
-    const index = this.posts.findIndex(p => p.id === id);
-    if (index === -1) return null;
-    return this.posts.splice(index, 1)[0];
-  }
-    */
 }

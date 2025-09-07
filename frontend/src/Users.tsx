@@ -1,31 +1,42 @@
 import { useEffect, useState } from "react";
+import DeleteUser from "./DeleteUser";
 
-type User = {
-  id: number;
-  isAdmin: boolean;
-  name: string;
-  username: string;
+type User = { id: number; isAdmin: boolean; name: string; username: string };
+
+type Props = {
+  onSelectUser: (userId: number) => void;
+  isLoggedIn: boolean;
+  currentUser: { id: number; isAdmin: boolean };
 };
 
-type Props = {onSelectUser: (userId: number) => void};
+function Users({ onSelectUser, isLoggedIn, currentUser }: Props) {
 
-function Users({onSelectUser}: Props) {
   const [users, setUsers] = useState<User[]>([]);  // Array of User objects
+  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);  // Admin can delete users, keep track of confirmation state
 
-  useEffect(() => {  // Get all users on mount
+  // Get all users on mount
+  useEffect(() => {
     fetch("http://localhost:3000/users")
-    .then((res) => res.json())
-    .then((data) => setUsers(data))
-    .catch((err) => console.error("Failed to fetch users:", err));
+      .then((res) => res.json())
+      .then((data) => setUsers(data))
+      .catch((err) => console.error("Failed to fetch users:", err));
   }, []);
 
-  return (  // For each user, add a userCard
+  // For each user, add a userCard
+  // If logged in as an admin add DeleteUser Component
+  return (
     <main>
       {users.map((user) => (
-        <div key={user.id} className="userCard">
+        <div key={user.id} className="postCard">
           <a onClick={() => onSelectUser(user.id)}>
-            {user.name} <span style={user.isAdmin ? {color: "#900000ff"} : {color: "gray"}}>@{user.username}</span>
+            {user.name}{" "}
+            <span style={user.isAdmin ? { color: "#900000ff" } : { color: "gray" }}>
+              @{user.username}
+            </span>
           </a>
+          {isLoggedIn && currentUser.isAdmin && user.id !== currentUser.id && (
+            <DeleteUser user={user} confirmDeleteId={confirmDeleteId} setConfirmDeleteId={setConfirmDeleteId} setUsers={setUsers}/>
+          )}
         </div>
       ))}
     </main>

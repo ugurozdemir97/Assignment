@@ -1,0 +1,1 @@
+A simple project with a React + TypeScript frontend and a NestJS backend that supports basic CRUD operations.

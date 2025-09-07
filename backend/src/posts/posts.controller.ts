@@ -11,25 +11,16 @@ export class PostsController {
   @Get('user/:userId')  // Find all posts of a user
   getByUser(@Param('userId') userId: string) {return this.postsService.findByUser(+userId);}
 
-  /*
-  @Get(':id')
-  getOne(@Param('id') id: string) {
-    return this.postsService.findOne(+id);
-  }
+  @Delete(':id')
+  delete(@Param('id') id: string) {return this.postsService.delete(+id)}
+
+  @Delete("user/:userId")
+  deleteByUser(@Param('userId') userId: string) {return this.postsService.deleteByUser(+userId)}
 
   @Post()
-  create(@Body() post: any) {
-    return this.postsService.create(post);
-  }
+  create(@Body() post: any) {return this.postsService.create(post)}
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() post: any) {
-    return this.postsService.update(+id, post);
-  }
+  update(@Param('id') id: string, @Body() post: any) {return this.postsService.update(+id, post)}
 
-  @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.postsService.delete(+id);
-  }
-  */
 }

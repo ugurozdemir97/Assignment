@@ -1,5 +1,13 @@
-function Header({setView}: any) {
 
+type Props = {
+  setView: (view: string) => void;
+  setIsLoggedIn: (loggedIn: boolean) => void;
+  isLoggedIn: boolean;
+};
+
+function Header({setView, setIsLoggedIn, isLoggedIn}: Props) {
+
+    // If logged in, render Logout button. If not logged in, render Login and Sign Up
     return (
         <header>
             <nav>
@@ -9,7 +17,14 @@ function Header({setView}: any) {
                     <a onClick={() => setView("users")}>Users</a>
                 </div>
                 <div>
-                    <a>Login</a>
+                    {!isLoggedIn ? (
+                        <>
+                            <a onClick={() => setView("login")}>Login</a>
+                            <a onClick={() => setView("signup")}>Sign Up</a>
+                        </>
+                        ) : (
+                            <a onClick={() => {setIsLoggedIn(false); setView("posts")}} >Logout</a>
+                        )}
                 </div>
             </nav> 
         </header>

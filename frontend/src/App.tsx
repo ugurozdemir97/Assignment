@@ -4,33 +4,42 @@ import Footer from "./Footer";
 import Posts from "./Posts";
 import Users from "./Users";
 import User from "./User";
+import Login from "./Login";
+import Signup from "./Signup";
 
 // Main App
 function App() {
 
-  const [view, setView] = useState("posts");  // To show different pages depending on which button we click
+  // Login/logout | We can get logged in info from backend instead of hard coding it like this
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState<{ id: number; isAdmin: boolean }>({id: 1, isAdmin: false,});
+
+  // To show different pages depending on which button we click. Default is posts page
+  const [view, setView] = useState("posts");  
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);  // If a user is selected, show only his posts
 
-  // If the view is "posts" or "users", send this method:
-  // (id: number) => {setSelectedUserId(id); setView("user");} 
-  // If we click a post or a user we will setView as "user" and we will call setSelectedUserId
+  // What will be shown in the home page is determined by "view"
   const renderMain = () => {
     switch (view) {
       case "posts":
-        return <Posts onSelectUser={(id: number) => {setSelectedUserId(id); setView("user");}} />;
+        return <Posts onSelectUser={(id: number) => {setSelectedUserId(id); setView("user");}} isLoggedIn={isLoggedIn} currentUser={currentUser}/>;
       case "users":
-        return <Users onSelectUser={(id: number) => {setSelectedUserId(id);setView("user");}} />;
+        return <Users onSelectUser={(id: number) => {setSelectedUserId(id); setView("user");}} isLoggedIn={isLoggedIn} currentUser={currentUser}/>;
       case "user":
-        return selectedUserId !== null ? <User userId={selectedUserId} /> : <></>;
+        return selectedUserId !== null ? <User userId={selectedUserId} isLoggedIn={isLoggedIn} currentUser={currentUser} setView={setView}/> : <></>;
+      case "login":
+        return <Login setView={setView} setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser}/>;
+      case "signup":
+        return <Signup setView={setView} setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser}/>;
       default:
         return <></>;
     }
   };
 
-  // Show header (nav bar and login buttons), posts or users, and the footer
+  // All components together
   return (
     <>
-      <Header setView={setView}></Header>
+      <Header setView={setView} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}></Header>
       {renderMain()}
       <Footer></Footer>
     </>

@@ -1,5 +1,14 @@
 import { Injectable } from '@nestjs/common';
 
+type Props = {
+  id: number, 
+  isAdmin: boolean, 
+  name: string, 
+  username: string, 
+  email: string, 
+  password: string
+};
+
 @Injectable()
 export class UsersService {
   private users = [
@@ -16,19 +25,23 @@ export class UsersService {
   // Find specific user by Id
   findOne(id: number) {return this.users.map(({id, isAdmin, name, username}) => ({id, isAdmin, name, username})).find(user => user.id === id);}
 
-  /*
-
-  create(user: any) {
-    user.id = this.users.length + 1;
-    this.users.push(user);
-    return user;
+  // Create new user
+  signup(user: Props) {
+      if (this.users.find(u => u.username === user.username)) return {success: false, message: 'User already exist!'};
+      else if (this.users.find(u => u.email === user.email)) return {success: false, message: 'Email is already used!'};
+      else {
+        user.id = this.users[this.users.length - 1]?.id + 1;
+        this.users.push(user);
+        return {success: true, message: "User created", user: {id: user.id, isAdmin: user.isAdmin}};
+      }
   }
 
-  update(id: number, updatedUser: any) {
-    const index = this.users.findIndex(u => u.id === id);
-    if (index === -1) return null;
-    this.users[index] = { ...this.users[index], ...updatedUser };
-    return this.users[index];
+  // Find user and check if the password is matching
+  login(username: string, password: string) {
+    const user = this.users.find(u => u.username === username);
+    if (!user) {return {success: false, message: 'User not found'}}
+    if (user.password !== password) {return {success: false, message: 'Incorrect password'};}
+    return {success: true, message: 'Login successful', user: {id: user.id, isAdmin: user.isAdmin}};
   }
 
   delete(id: number) {
@@ -36,5 +49,5 @@ export class UsersService {
     if (index === -1) return null;
     return this.users.splice(index, 1)[0];
   }
-  */
+  
 }

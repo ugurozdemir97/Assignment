@@ -56,7 +56,14 @@ nav img {
 
 main {flex: 1}
 
-.postCard, .userCard {
+form {
+  display: "flex";
+  flex-direction: "column"; 
+  gap: "10px"; 
+  max-width: "400px"
+}
+
+.postCard {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   margin: 20px;
@@ -72,6 +79,92 @@ main {flex: 1}
 }
 
 .postCard p {margin: 0}
+
+.form-button {
+  background-color: #F4C400;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.form-button:hover {transform: scale(1.01)}
+
+button img {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-button:hover > img {transform: scale(1.1);}
+
+.edit-buttons {
+  padding: 5px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.confirm-tooltip, .edit-form {
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 1;
+  border-radius: 6px;
+}
+
+.edit-form {width: 90%}
+
+.confirm-tooltip div, .edit-form div {
+  display: flex;
+  column-gap: 5px;
+  justify-content: center;
+}
+
+.confirm-tooltip button, .edit-form button {width: 70px}
+
+.new-post {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 20px;
+}
+
+.new-post p {margin: 5px;}
+
+.new-post input,
+.new-post textarea,
+.edit-form input, 
+.edit-form textarea {
+  padding: 5px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.new-post button:hover,
+.edit-form .form-button:hover {
+  background-color: #ff8900ff;
+  transform: none
+}
+
+.delete-user-button {margin-right: 30px}
 
 /***************** Footer *****************/
 
