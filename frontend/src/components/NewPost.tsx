@@ -19,7 +19,7 @@ function NewPost({ currentUser, setPosts }: Props) {
 
         // Send create post request to /posts
         try {
-            const response = await fetch("http://localhost:3000/posts", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/posts`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ userId: currentUser.id, title, postContext }),

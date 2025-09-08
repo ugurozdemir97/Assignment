@@ -7,17 +7,18 @@ import DeletePost from "../components/DeletePost";
 type Props = PostsAndUsers & {setSelectedUserId: Dispatch<SetStateAction<number | null>>;}
 
 function Posts({ setSelectedUserId, setView, isLoggedIn, currentUser }: Props) {
+    
     const [posts, setPosts] = useState<PostProp[]>([]);
     const [users, setUsers] = useState<UserProp[]>([]);
 
     // Render all posts on mount
     useEffect(() => {
-        fetch("http://localhost:3000/posts")
+        fetch(`${import.meta.env.VITE_API_URL}/posts`)
             .then((res) => res.json())
             .then((data) => setPosts(data))
             .catch((err) => console.error("Failed to fetch posts:", err));
 
-        fetch("http://localhost:3000/users")
+        fetch(`${import.meta.env.VITE_API_URL}/users`)
             .then((res) => res.json())
             .then((data) => setUsers(data))
             .catch((err) => console.error("Failed to fetch users:", err));
@@ -45,26 +46,26 @@ function Posts({ setSelectedUserId, setView, isLoggedIn, currentUser }: Props) {
             {isLoggedIn && <NewPost currentUser={currentUser} setPosts={setPosts} />}
 
             {posts.slice().reverse().map((post) => (
-                    <div key={post.id} className="postCard">
-                        <a onClick={() => {setSelectedUserId(post.userId); setView("user");}}
-                            style={getStatus(post.userId) ? { color: "#900000ff" } : { color: "black" }}>
+                <div key={post.id} className="postCard">
+                    <a onClick={() => {setSelectedUserId(post.userId); setView("user")}}
+                        style={getStatus(post.userId) ? { color: "#900000ff" } : { color: "black" }}>
                             @{getUsername(post.userId)}
-                        </a>
-                        <div>
-                            <p style={{ fontWeight: "700" }}>{post.title}</p>
-                            <p>{post.postContext}</p>
-                            {isLoggedIn &&
+                    </a>
+                    <div>
+                        <p style={{ fontWeight: "700" }}>{post.title}</p>
+                        <p>{post.postContext}</p>
+                        {isLoggedIn &&
                                 (currentUser.id === post.userId || currentUser.isAdmin) && (
-                                    <DeletePost
-                                        post={post}
-                                        confirmDeleteId={confirmDeleteId}
-                                        setConfirmDeleteId={setConfirmDeleteId}
-                                        setPosts={setPosts}
-                                    />
-                                )}
-                        </div>
+                            <DeletePost
+                                post={post}
+                                confirmDeleteId={confirmDeleteId}
+                                setConfirmDeleteId={setConfirmDeleteId}
+                                setPosts={setPosts}
+                            />
+                        )}
                     </div>
-                ))}
+                </div>
+            ))}
         </main>
     );
 }

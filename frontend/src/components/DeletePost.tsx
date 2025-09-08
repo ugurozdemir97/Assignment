@@ -22,7 +22,7 @@ function DeletePost({ post, confirmDeleteId, setConfirmDeleteId, setPosts }: Pro
 
         // Send edit post request to /posts/:id
         try {
-            const response = await fetch(`http://localhost:3000/posts/${post.id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/posts/${post.id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ title: editedTitle, postContext: editedContext }),
@@ -50,7 +50,7 @@ function DeletePost({ post, confirmDeleteId, setConfirmDeleteId, setPosts }: Pro
     const handleConfirmDelete = async (id: number) => {
         // Send delete request to the backend
         try {
-            await fetch(`http://localhost:3000/posts/${id}`, { method: "DELETE" });
+            await fetch(`${import.meta.env.VITE_API_URL}/posts/${id}`, { method: "DELETE" });
             setPosts((prev) => prev.filter((p) => p.id !== id));
         } catch (err) {
             console.error("Delete failed", err);

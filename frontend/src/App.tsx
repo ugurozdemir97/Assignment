@@ -9,6 +9,7 @@ import Signup from "./auth/Signup";
 
 // Main App
 function App() {
+
     // Login/logout | We can get logged in info from backend instead of hard coding it like this
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [currentUser, setCurrentUser] = useState<{ id: number; isAdmin: boolean }>({id: 1,isAdmin: false,});

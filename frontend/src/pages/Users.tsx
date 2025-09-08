@@ -11,7 +11,7 @@ function Users({ setSelectedUserId, setView, isLoggedIn, currentUser }: Props) {
 
     // Get all users on mount
     useEffect(() => {
-        fetch("http://localhost:3000/users")
+        fetch(`${import.meta.env.VITE_API_URL}/users`)
             .then((res) => res.json())
             .then((data) => setUsers(data))
             .catch((err) => console.error("Failed to fetch users:", err));

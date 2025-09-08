@@ -33,7 +33,7 @@ function DeleteUser({
 
         // Send edit post request to /users/:id
         try {
-            const response = await fetch(`http://localhost:3000/users/${user.id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${user.id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name: editedName, username: editedUsername }),
@@ -70,8 +70,8 @@ function DeleteUser({
         // If you delete a user, send that request to /users/:id to delete it from server and send it to
         // posts/user/:id for deleting the posts of the user
         try {
-            await fetch(`http://localhost:3000/users/${id}`, { method: "DELETE" });
-            await fetch(`http://localhost:3000/posts/user/${id}`, { method: "DELETE" });
+            await fetch(`${import.meta.env.VITE_API_URL}/users/${id}`, { method: "DELETE" });
+            await fetch(`${import.meta.env.VITE_API_URL}/posts/user/${id}`, { method: "DELETE" });
             if (setUsers) setUsers((prev) => prev.filter((u) => u.id !== id)); // Update users
             if (setView) setView("posts");
         } catch (err) {

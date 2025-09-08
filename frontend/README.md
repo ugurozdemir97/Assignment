@@ -13,6 +13,7 @@ The server will run on http://localhost:5173/
 │   ├── pages/               # Page level components (Posts page, Users Page, User Profile)
 │   ├── types/               # TypeScript type definitions
 │   ├── assets/              # App icon
+│   ├── index.css            # Main CSS file
 │   └── App.tsx              # Main app component
 ├── index.html               # Main HTML file
 ├── eslint.config.js         # ESLint configuration

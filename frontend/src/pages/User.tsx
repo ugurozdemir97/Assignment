@@ -12,7 +12,7 @@ function User({ userId, isLoggedIn, currentUser, setView }: Props) {
 
     useEffect(() => {
         // Fetch posts of the user
-        fetch(`http://localhost:3000/posts/user/${userId}`)
+        fetch(`${import.meta.env.VITE_API_URL}/posts/user/${userId}`)
             .then((res) => res.json())
             .then((data) => {
                 setUserPosts(data);
@@ -20,7 +20,7 @@ function User({ userId, isLoggedIn, currentUser, setView }: Props) {
             .catch((err) => console.error("Failed to fetch posts:", err));
 
         // Fetch username
-        fetch(`http://localhost:3000/users/${userId}`)
+        fetch(`${import.meta.env.VITE_API_URL}/users/${userId}`)
             .then((res) => res.json())
             .then((data) => {
                 setUser(data);
@@ -56,28 +56,28 @@ function User({ userId, isLoggedIn, currentUser, setView }: Props) {
             )}
 
             {userPosts.slice().reverse().map((post) => (
-                    <div key={post.id} className="postCard">
-                        {theUser && (
-                            <a style={theUser.isAdmin ? { color: "#900000ff" } : { color: "black" }}>
+                <div key={post.id} className="postCard">
+                    {theUser && (
+                        <a style={theUser.isAdmin ? { color: "#900000ff" } : { color: "black" }}>
                                 @{theUser.username}
-                            </a>
-                        )}
-                        <div>
-                            <p style={{ fontWeight: "700" }}>{post.title}</p>
-                            <p>{post.postContext}</p>
-                            {isLoggedIn &&
+                        </a>
+                    )}
+                    <div>
+                        <p style={{ fontWeight: "700" }}>{post.title}</p>
+                        <p>{post.postContext}</p>
+                        {isLoggedIn &&
                                 theUser &&
                                 (currentUser.id === theUser.id || currentUser.isAdmin) && (
-                                    <DeletePost
-                                        post={post}
-                                        confirmDeleteId={confirmDeleteId}
-                                        setConfirmDeleteId={setConfirmDeleteId}
-                                        setPosts={setUserPosts}
-                                    />
-                                )}
-                        </div>
+                            <DeletePost
+                                post={post}
+                                confirmDeleteId={confirmDeleteId}
+                                setConfirmDeleteId={setConfirmDeleteId}
+                                setPosts={setUserPosts}
+                            />
+                        )}
                     </div>
-                ))}
+                </div>
+            ))}
         </main>
     );
 }

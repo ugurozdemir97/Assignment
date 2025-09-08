@@ -29,7 +29,7 @@ function Signup({ setView, setIsLoggedIn, setCurrentUser }: LoginProp) {
 
         // Send sign up credentials to /users/signup
         try {
-            const response = await fetch("http://localhost:3000/users/signup", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/users/signup`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
