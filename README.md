@@ -27,7 +27,9 @@ The server will run on http://localhost:5173/
 
 Now you can go to http://localhost:5173/ and use the app.
 
-You can test demo here (it may not work due to inactivity): https://assignment-1-du60.onrender.com/
+You can test demo here (it's a free deployment so backend may not work due to inactivity, open the backend and wait a couple of minutes then refresh frontend): 
+https://assignment-1-du60.onrender.com/
+https://assignment-backend-v0y7.onrender.com/
 
 <pre>
 Assignment/
