@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import DeleteUser from "./DeleteUser";
 
-type User = { id: number; isAdmin: boolean; name: string; username: string };
+type User = { id: number; isAdmin: boolean; name?: string; username: string };
 
 type Props = {
   onSelectUser: (userId: number) => void;

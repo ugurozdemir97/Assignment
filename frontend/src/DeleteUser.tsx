@@ -1,4 +1,4 @@
-type User = { id: number; isAdmin: boolean; username: string };
+type User = { id: number; isAdmin: boolean; name?: string; username: string };
 
 type Props = {
   user: User;
