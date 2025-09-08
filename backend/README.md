@@ -3,8 +3,7 @@ npm install
 npm run start
 The server will run on http://localhost:3000/
 
-/*************** BACKEND STRUCTURE ***************/
-
+<pre>
 /backend                     # Backend (NestJS)
 ├── src/                     # Source code
 │   ├── posts/               # Posts related files
@@ -16,3 +15,4 @@ The server will run on http://localhost:3000/
 ├── tsconfig.json            # TypeScript configuration
 ├── package.json             # Project metadata and dependencies
 └── README.md                # Project documentation
+</pre>

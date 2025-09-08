@@ -3,8 +3,7 @@ npm install
 npm run dev
 The server will run on http://localhost:5173/
 
-/*************** FRONTEND STRUCTURE ***************/
-
+<pre>
 /frontend                    # Frontend (React + TypeScript)
 ├── public/                  # Static assets (Logo, edit and delete icons)
 ├── src/                     # Source code
@@ -21,3 +20,4 @@ The server will run on http://localhost:5173/
 ├── tsconfig.json            # TypeScript configuration
 ├── package.json             # Project metadata and dependencies
 └── README.md                # Project documentation
+</pre>

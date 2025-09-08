@@ -27,8 +27,7 @@ The server will run on http://localhost:5173/
 
 Now you can go to http://localhost:5173/ and use the app.
 
-/*************** PROJECT STRUCTURE ***************/
-
+<pre>
 Assignment/
 ├── backend/                         # Backend (NestJS)
 │   ├── src/                         # Source code
@@ -60,3 +59,4 @@ Assignment/
 │   └── README.md                    # Frontend documentation
 │
 └── README.md                        # Root documentation
+</pre>
