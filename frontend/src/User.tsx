@@ -1,79 +1,104 @@
 import { useEffect, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import DeletePost from "./DeletePost";
 import NewPost from "./NewPost";
 import DeleteUser from "./DeleteUser";
 
 type Post = {
-  id: number;
-  userId: number;
-  title: string;
-  postContext: string;
+    id: number;
+    userId: number;
+    title: string;
+    postContext: string;
 };
 
-type User = {
-  id: number;
-  isAdmin: boolean;
-  username: string;
+type UserProp = {
+    id: number;
+    isAdmin: boolean;
+    name: string;
+    username: string;
 };
 
 type Props = {
-  userId: number;
-  isLoggedIn: boolean;
-  currentUser: {id: number; isAdmin: boolean};
-  setView: (view: string) => void;
+    userId: number;
+    isLoggedIn: boolean;
+    currentUser: { id: number; isAdmin: boolean };
+    setView: Dispatch<SetStateAction<string>>;
 };
 
-function User({userId, isLoggedIn, currentUser, setView}: Props) {
-  const [userPosts, setUserPosts] = useState<Post[]>([]);
-  const [theUser, setUser] = useState<User | null>(null);
+function User({ userId, isLoggedIn, currentUser, setView }: Props) {
+    const [userPosts, setUserPosts] = useState<Post[]>([]);
+    const [theUser, setUser] = useState<UserProp | null>(null);
 
-  useEffect(() => {
-    // Fetch posts of the user
-    fetch(`http://localhost:3000/posts/user/${userId}`)
-      .then((res) => res.json())
-      .then((data) => {setUserPosts(data)})
-      .catch((err) => console.error("Failed to fetch posts:", err));
+    useEffect(() => {
+        // Fetch posts of the user
+        fetch(`http://localhost:3000/posts/user/${userId}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setUserPosts(data);
+            })
+            .catch((err) => console.error("Failed to fetch posts:", err));
 
-    // Fetch username
-    fetch(`http://localhost:3000/users/${userId}`)
-      .then((res) => res.json())
-      .then((data) => {setUser(data)})
-      .catch((err) => console.error("Failed to fetch user:", err));
-  }, [userId]);
+        // Fetch username
+        fetch(`http://localhost:3000/users/${userId}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setUser(data);
+            })
+            .catch((err) => console.error("Failed to fetch user:", err));
+    }, [userId]);
 
-  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
-  const [confirmDeleteUser, setConfirmDeleteUser] = useState<number | null>(null);
+    const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
+    const [confirmDeleteUser, setConfirmDeleteUser] = useState<number | null>(null);
 
-  // If the user profile and the logged in user is the same, render NewPost component
-  return (
-    <main>
-
-      {theUser && (
-        <p style={{ fontWeight: "700", fontSize: "20px", margin: "20px 0 0 20px"}}>Posts by @{theUser.username}</p>
-      )}
-
-      {theUser && isLoggedIn && currentUser.isAdmin && userId !== currentUser.id && (
-        <DeleteUser className="delete-user-button" user={theUser} confirmDeleteId={confirmDeleteUser} setConfirmDeleteId={setConfirmDeleteUser} setView={setView}/>
-      )}
-
-      {(isLoggedIn && currentUser.id === userId) && (
-        <NewPost currentUser={currentUser} setPosts={setUserPosts} />
-      )}
-
-      {userPosts.slice().reverse().map((post) => (
-        <div key={post.id} className="postCard">
-          {theUser && <a style={theUser.isAdmin ? {color: "#900000ff"} : {color: "black"}}>@{theUser.username}</a>}
-          <div>
-            <p style={{ fontWeight: "700" }}>{post.title}</p>
-            <p>{post.postContext}</p>
-            {isLoggedIn && theUser && (currentUser.id === theUser.id || currentUser.isAdmin) && (
-              <DeletePost post={post} confirmDeleteId={confirmDeleteId} setConfirmDeleteId={setConfirmDeleteId} setPosts={setUserPosts}/>
+    // If the user profile and the logged in user is the same, render NewPost component
+    return (
+        <main>
+            {theUser && (
+                <p style={{ fontWeight: "700", fontSize: "20px", margin: "20px 0 0 20px" }}>
+                    Posts by @{theUser.username}
+                </p>
             )}
-          </div>
-        </div>
-      ))}
-    </main>
-  );
+
+            {theUser && isLoggedIn && currentUser.isAdmin && userId !== currentUser.id && (
+                <DeleteUser
+                    className="delete-user-button"
+                    user={theUser}
+                    confirmDeleteId={confirmDeleteUser}
+                    setConfirmDeleteId={setConfirmDeleteUser}
+                    setUser={setUser}
+                    setView={setView}
+                />
+            )}
+
+            {isLoggedIn && currentUser.id === userId && (
+                <NewPost currentUser={currentUser} setPosts={setUserPosts} />
+            )}
+
+            {userPosts.slice().reverse().map((post) => (
+                    <div key={post.id} className="postCard">
+                        {theUser && (
+                            <a style={theUser.isAdmin ? { color: "#900000ff" } : { color: "black" }}>
+                                @{theUser.username}
+                            </a>
+                        )}
+                        <div>
+                            <p style={{ fontWeight: "700" }}>{post.title}</p>
+                            <p>{post.postContext}</p>
+                            {isLoggedIn &&
+                                theUser &&
+                                (currentUser.id === theUser.id || currentUser.isAdmin) && (
+                                    <DeletePost
+                                        post={post}
+                                        confirmDeleteId={confirmDeleteId}
+                                        setConfirmDeleteId={setConfirmDeleteId}
+                                        setPosts={setUserPosts}
+                                    />
+                                )}
+                        </div>
+                    </div>
+                ))}
+        </main>
+    );
 }
 
 export default User;

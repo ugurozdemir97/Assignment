@@ -1,2 +1,9 @@
-function Footer() {return (<footer><p>&copy; 2025 Uğur Özdemir's Assignment</p></footer>);}
+function Footer() {
+    const footerText = "© 2025 Uğur Özdemir's Assignment";
+    return (
+        <footer>
+            <p>{footerText}</p>
+        </footer>
+    );
+}
 export default Footer;
