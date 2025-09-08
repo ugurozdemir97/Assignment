@@ -27,6 +27,8 @@ The server will run on http://localhost:5173/
 
 Now you can go to http://localhost:5173/ and use the app.
 
+You can test demo here (it may not work due to inactivity): https://assignment-1-du60.onrender.com/
+
 <pre>
 Assignment/
 ├── backend/                         # Backend (NestJS)
