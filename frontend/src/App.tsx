@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import Posts from "./Posts";
-import Users from "./Users";
-import User from "./User";
-import Login from "./Login";
-import Signup from "./Signup";
+import Header from "./header/Header";
+import Footer from "./header/Footer";
+import Posts from "./pages/Posts";
+import Users from "./pages/Users";
+import User from "./pages/User";
+import Login from "./auth/Login";
+import Signup from "./auth/Signup";
 
 // Main App
 function App() {

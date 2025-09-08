@@ -1,32 +1,13 @@
 import { useEffect, useState } from "react";
-import type { Dispatch, SetStateAction } from "react";
-import DeletePost from "./DeletePost";
-import NewPost from "./NewPost";
-import DeleteUser from "./DeleteUser";
+import type { UserProp, PostProp, PostsAndUsers } from "../types/dataTypes";
+import DeletePost from "../components/DeletePost";
+import NewPost from "../components/NewPost";
+import DeleteUser from "../components/DeleteUser";
 
-type Post = {
-    id: number;
-    userId: number;
-    title: string;
-    postContext: string;
-};
-
-type UserProp = {
-    id: number;
-    isAdmin: boolean;
-    name: string;
-    username: string;
-};
-
-type Props = {
-    userId: number;
-    isLoggedIn: boolean;
-    currentUser: { id: number; isAdmin: boolean };
-    setView: Dispatch<SetStateAction<string>>;
-};
+type Props = PostsAndUsers & {userId: number;}
 
 function User({ userId, isLoggedIn, currentUser, setView }: Props) {
-    const [userPosts, setUserPosts] = useState<Post[]>([]);
+    const [userPosts, setUserPosts] = useState<PostProp[]>([]);
     const [theUser, setUser] = useState<UserProp | null>(null);
 
     useEffect(() => {

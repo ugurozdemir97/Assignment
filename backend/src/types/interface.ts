@@ -13,3 +13,10 @@ export interface UpdatedUser {
     name: string;
     username: string;
 }
+
+export interface UpdatedPost {
+    id: number;
+    userId: number;
+    title: string;
+    postContext: string;
+}

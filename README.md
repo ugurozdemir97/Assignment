@@ -26,3 +26,37 @@ npm run dev
 The server will run on http://localhost:5173/
 
 Now you can go to http://localhost:5173/ and use the app.
+
+/*************** PROJECT STRUCTURE ***************/
+
+Assignment/
+├── backend/                         # Backend (NestJS)
+│   ├── src/                         # Source code
+│   │   ├── posts/                   # Posts related files
+│   │   ├── users/                   # Users related files
+│   │   ├── types/                   # TypeScript interface definitions
+│   │   └── main.ts                  # Backend server entry point
+│   ├── eslint.config.mjs            # ESLint configuration
+│   ├── .prettierrc                  # Prettier configuration
+│   ├── tsconfig.json                # TypeScript configuration
+│   ├── package.json                 # Project metadata and dependencies
+│   └── README.md                    # Backend documentation
+│
+├── frontend/                        # Frontend (React + TypeScript)
+│   ├── public/                      # Static assets (logo, edit/delete icons)
+│   ├── src/                         # Source code
+│   │   ├── components/              # Reusable UI components (delete post/user, new post)
+│   │   ├── auth/                    # Login and Sign Up forms
+│   │   ├── header/                  # Header and Footer
+│   │   ├── pages/                   # Page level components (Posts, Users, Profile)
+│   │   ├── types/                   # TypeScript type definitions
+│   │   ├── assets/                  # App icon
+│   │   └── App.tsx                  # Main app component
+│   ├── index.html                   # Main HTML file
+│   ├── eslint.config.js             # ESLint configuration
+│   ├── .prettierrc                  # Prettier configuration
+│   ├── tsconfig.json                # TypeScript configuration
+│   ├── package.json                 # Project metadata and dependencies
+│   └── README.md                    # Frontend documentation
+│
+└── README.md                        # Root documentation

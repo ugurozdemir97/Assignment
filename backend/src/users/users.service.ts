@@ -1,4 +1,4 @@
-import type { User, UpdatedUser } from "./users.userinterface";
+import type { User, UpdatedUser } from "../types/interface";
 import { Injectable } from "@nestjs/common";
 
 @Injectable()

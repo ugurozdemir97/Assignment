@@ -1,31 +1,14 @@
 import { useEffect, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
-import NewPost from "./NewPost";
-import DeletePost from "./DeletePost";
+import type { UserProp, PostProp, PostsAndUsers } from "../types/dataTypes";
+import NewPost from "../components/NewPost";
+import DeletePost from "../components/DeletePost";
 
-type Post = {
-    id: number;
-    userId: number;
-    title: string;
-    postContext: string;
-};
-
-type User = {
-    id: number;
-    isAdmin: boolean;
-    username: string;
-};
-
-type Props = {
-    setSelectedUserId: Dispatch<SetStateAction<number | null>>;
-    setView: Dispatch<SetStateAction<string>>;
-    isLoggedIn: boolean;
-    currentUser: { id: number; isAdmin: boolean };
-};
+type Props = PostsAndUsers & {setSelectedUserId: Dispatch<SetStateAction<number | null>>;}
 
 function Posts({ setSelectedUserId, setView, isLoggedIn, currentUser }: Props) {
-    const [posts, setPosts] = useState<Post[]>([]);
-    const [users, setUsers] = useState<User[]>([]);
+    const [posts, setPosts] = useState<PostProp[]>([]);
+    const [users, setUsers] = useState<UserProp[]>([]);
 
     // Render all posts on mount
     useEffect(() => {

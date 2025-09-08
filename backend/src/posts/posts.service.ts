@@ -1,4 +1,4 @@
-import type { UpdatedPost } from "./posts.postinterface";
+import type { UpdatedPost } from "../types/interface";
 import { Injectable } from "@nestjs/common";
 
 @Injectable()

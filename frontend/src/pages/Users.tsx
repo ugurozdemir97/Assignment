@@ -1,23 +1,12 @@
 import { useEffect, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
-import DeleteUser from "./DeleteUser";
+import type { UserProp, PostsAndUsers } from "../types/dataTypes";
+import DeleteUser from "../components/DeleteUser";
 
-type User = {
-    id: number;
-    isAdmin: boolean;
-    name: string;
-    username: string;
-};
-
-type Props = {
-    setSelectedUserId: Dispatch<SetStateAction<number | null>>;
-    setView: Dispatch<SetStateAction<string>>;
-    isLoggedIn: boolean;
-    currentUser: { id: number; isAdmin: boolean };
-};
+type Props = PostsAndUsers & {setSelectedUserId: Dispatch<SetStateAction<number | null>>;}
 
 function Users({ setSelectedUserId, setView, isLoggedIn, currentUser }: Props) {
-    const [users, setUsers] = useState<User[]>([]); // Array of User objects
+    const [users, setUsers] = useState<UserProp[]>([]); // Array of User objects
     const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null); // Admin can delete users, keep track of confirmation state
 
     // Get all users on mount

@@ -1,19 +1,13 @@
 import { useState } from "react";
 import type { Dispatch, SetStateAction, FormEvent } from "react";
-
-type User = {
-    id: number;
-    isAdmin: boolean;
-    name: string;
-    username: string;
-};
+import type { UserProp } from "../types/dataTypes";
 
 type Props = {
-    user: User;
+    user: UserProp;
     confirmDeleteId: number | null;
     setConfirmDeleteId: Dispatch<SetStateAction<number | null>>;
-    setUsers?: Dispatch<SetStateAction<User[]>>;
-    setUser?: Dispatch<SetStateAction<User | null>>;
+    setUsers?: Dispatch<SetStateAction<UserProp[]>>;
+    setUser?: Dispatch<SetStateAction<UserProp | null>>;
     setView?: Dispatch<SetStateAction<string>>;
     className?: string;
 };

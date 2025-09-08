@@ -1,12 +1,11 @@
 import { useState } from "react";
 import type { Dispatch, SetStateAction, FormEvent } from "react";
+import type { PostProp } from "../types/dataTypes";
 
 type Props = {
     currentUser: { id: number; isAdmin: boolean };
-    setPosts: Dispatch<SetStateAction<Post[]>>;
+    setPosts: Dispatch<SetStateAction<PostProp[]>>;
 };
-
-type Post = { id: number; userId: number; title: string; postContext: string };
 
 function NewPost({ currentUser, setPosts }: Props) {
     

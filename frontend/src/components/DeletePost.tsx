@@ -1,18 +1,12 @@
 import { useState } from "react";
 import type { Dispatch, SetStateAction, FormEvent } from "react";
-
-type Post = {
-    id: number;
-    userId: number;
-    title: string;
-    postContext: string;
-};
+import type { PostProp } from "../types/dataTypes";
 
 type Props = {
-    post: Post;
+    post: PostProp;
     confirmDeleteId: number | null;
     setConfirmDeleteId: Dispatch<SetStateAction<number | null>>;
-    setPosts: Dispatch<SetStateAction<Post[]>>;
+    setPosts: Dispatch<SetStateAction<PostProp[]>>;
 };
 
 function DeletePost({ post, confirmDeleteId, setConfirmDeleteId, setPosts }: Props) {

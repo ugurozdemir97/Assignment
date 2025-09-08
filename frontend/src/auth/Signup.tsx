@@ -1,22 +1,8 @@
 import { useState } from "react";
-import type { Dispatch, SetStateAction, FormEvent, ChangeEvent } from "react";
+import type { FormEvent, ChangeEvent } from "react";
+import type { UserFormData, LoginProp } from "../types/dataTypes";
 
-type Props = {
-    setView: Dispatch<SetStateAction<string>>;
-    setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
-    setCurrentUser: Dispatch<SetStateAction<{ id: number; isAdmin: boolean }>>;
-};
-
-type UserFormData = {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-    password: string;
-    isAdmin: boolean;
-};
-
-function Signup({ setView, setIsLoggedIn, setCurrentUser }: Props) {
+function Signup({ setView, setIsLoggedIn, setCurrentUser }: LoginProp) {
     const [error, setError] = useState("");
     const [formData, setFormData] = useState<UserFormData>({
         id: 0,
