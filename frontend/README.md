@@ -1,6 +1,6 @@
-Navigate to frontend folder in terminal and type:
-npm install
-npm run dev
+Navigate to frontend folder in terminal and type:<br>
+npm install<br>
+npm run dev<br>
 The server will run on http://localhost:5173/
 
 <pre>
