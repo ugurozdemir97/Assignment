@@ -29,10 +29,10 @@ Now you can go to http://localhost:5173/ and use the app.
 
 You can test demo here: 
 
-Backend (It's a free deployment so it may not work due to inactivity, open it and wait a couple of minutes until the server starts running.)
+Backend (It's a free deployment so it may not work due to inactivity, open it and wait a couple of minutes until the server starts running): <br>
 https://assignment-backend-v0y7.onrender.com/
 
-Frontend (Open this after the backend server starts running):
+Frontend (Open this after the backend server starts running): <br>
 https://assignment-1-du60.onrender.com/
 
 
