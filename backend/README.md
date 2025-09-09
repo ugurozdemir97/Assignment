@@ -1,6 +1,6 @@
-Navigate to backend folder in terminal and type:
-npm install
-npm run start
+Navigate to backend folder in terminal and type:<br>
+npm install<br>
+npm run start<br>
 The server will run on http://localhost:3000/
 
 <pre>
